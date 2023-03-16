@@ -6,6 +6,8 @@ class FPSCounter :    public AObject
 	public:
 		FPSCounter();
 		~FPSCounter();
+		// Inherited via AObject
+		virtual void initialize() override;
 		void Update(sf::Time deltaTime) override;
 		void Draw(sf::RenderWindow* targetWindow, sf::RenderStates renderStates) override;
 	

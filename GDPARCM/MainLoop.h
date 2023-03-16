@@ -1,4 +1,5 @@
 #include <SFML/Graphics.hpp>
+#include "Estelle.h"
 
 class MainLoop {
 public:
@@ -24,6 +25,8 @@ private:
     sf::Font mFont;
     sf::Text mStatisticsText;
     sf::Time mStatisticsUpdateTime;
+
+    Estelle* estelleRef;
 
     unsigned int numFrames;
     bool mIsMovingUp = false;

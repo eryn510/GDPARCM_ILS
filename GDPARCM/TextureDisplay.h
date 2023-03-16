@@ -12,6 +12,9 @@ public:
 	TextureDisplay();
 	void Update(sf::Time deltaTime);
 
+	// Inherited via AObject
+	virtual void initialize() override;
+
 	// Inherited via IExecutionEvent
 	virtual void onFinishedExecution() override;
 

@@ -5,6 +5,10 @@
 #include "ObjectManager.h"
 #include "TextureDisplay.h"
 #include "FPSCounter.h"
+#include "IsometricMap.h"
+#include "Estelle.h"
+#include "Joshua.h"
+#include "StatusBar.h"
 #include <iostream>
 
 const sf::Time MainLoop::TIME_PER_FRAME = sf::seconds(1.f / 60.f);
@@ -14,8 +18,28 @@ MainLoop::MainLoop() : mWindow(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "SFML
     TextureManager::getInstance()->loadFromAssetList();
 
     //load objects
-    BGObject* bgObject = new BGObject("BGObject");
-    ObjectManager::getInstance()->addObject(bgObject);
+    //BGObject* bgObject = new BGObject("BGObject");
+    //ObjectManager::getInstance()->addObject(bgObject);
+
+
+    IsometricMap* isoMap = new IsometricMap(32,32);
+    isoMap->initializeMap();
+
+    Joshua* joshua = new Joshua("Joshua");
+    joshua->setScale(2, 2);
+    joshua->setPosition(-128, -64);
+    joshua->setIdlePos(sf::Vector2f(-128, -64));
+    joshua->changeState(IDLE);
+    ObjectManager::getInstance()->addObject(joshua);
+
+    Estelle* estelle = new Estelle("Estelle");
+    estelleRef = estelle;
+    estelle->setScale(2, 2);
+    estelle->setPosition(-32, 32);
+    estelle->setIdlePos(sf::Vector2f(-32,32));
+    estelle->changeState(IDLE);
+    ObjectManager::getInstance()->addObject(estelle);
+
 
     TextureDisplay* display = new TextureDisplay();
     ObjectManager::getInstance()->addObject(display);
@@ -23,16 +47,18 @@ MainLoop::MainLoop() : mWindow(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "SFML
     FPSCounter* fpsCounter = new FPSCounter();
     ObjectManager::getInstance()->addObject(fpsCounter);
 
+    float UISpacing = 50.0f;
+    sf::Vector2f StatusBarDim = sf::Vector2f(400.0f, 200.0f);
 
-    //TextureManager::getInstance()->loadSingleStreamAsset(1);
-    //std::cout << TextureManager::getInstance()->getNumLoadedStreamTextures() << std::endl;
+    StatusBar* EstelleDisplay = new StatusBar("EstelleDisplay", ESTELLE);
+    EstelleDisplay->setPosition(-(WINDOW_WIDTH / 2) + UISpacing + (StatusBarDim.x * 0.5), (WINDOW_HEIGHT / 2) - (StatusBarDim.y / 2));
+    ObjectManager::getInstance()->addObject(EstelleDisplay);
+    EstelleDisplay->initialize();
     
-    /*
-    for (i = 0; i < 480; i++) 
-    {
-        TextureManager::getInstance()->loadSingleStreamAsset(i);
-    }
-    */
+    StatusBar* JoshuaDisplay = new StatusBar("JoshuaDisplay", JOSHUA);
+    JoshuaDisplay->setPosition(-(WINDOW_WIDTH / 2)  + UISpacing * 2 + (StatusBarDim.x * 1.5), (WINDOW_HEIGHT / 2) - (StatusBarDim.y / 2));
+    ObjectManager::getInstance()->addObject(JoshuaDisplay);
+    JoshuaDisplay->initialize();
 
     
 }
@@ -66,6 +92,12 @@ void MainLoop::processEvents() {
         case sf::Event::Closed:
             this->mWindow.close();
             break;
+        case sf::Event::KeyPressed:
+            handlePlayerInput(event.key.code, true);
+            break;
+        case sf::Event::KeyReleased:
+            handlePlayerInput(event.key.code, false);
+            break;
 
         }
     }
@@ -84,6 +116,8 @@ void MainLoop::handlePlayerInput(sf::Keyboard::Key key, bool isPressed) {
 void MainLoop::update(sf::Time deltaTime)
 {
     ObjectManager::getInstance()->update(deltaTime);
+    if (mIsMovingUp)
+        estelleRef->changeState(ATTACK);
 }
 
 void MainLoop::render() {

@@ -33,11 +33,15 @@ void TextureDisplay::Update(sf::Time deltaTime)
 		//if (this->numDisplayed < 100) 
 		//{
 			this->ticks = 0.0f;
-			TextureManager::getInstance()->loadSingleStreamAsset(this->numDisplayed, this);
+			//TextureManager::getInstance()->loadSingleStreamAsset(this->numDisplayed, this);
 			this->numDisplayed++;
 		//}
 		
 	}
+}
+
+void TextureDisplay::initialize()
+{
 }
 
 void TextureDisplay::onFinishedExecution()

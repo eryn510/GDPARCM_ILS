@@ -1,7 +1,5 @@
-﻿  MainLoop.cpp
-  TextureDisplay.cpp
-D:\PROJECT FILES\CODES\GDPARCM\GDPARCM\TextureDisplay.cpp(51,73): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-D:\PROJECT FILES\CODES\GDPARCM\GDPARCM\TextureDisplay.cpp(56,10): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-D:\PROJECT FILES\CODES\GDPARCM\GDPARCM\TextureDisplay.cpp(57,10): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-  Generating Code...
-  GDPARCM.vcxproj -> D:\PROJECT FILES\CODES\GDPARCM\x64\Debug\GDPARCM.exe
+﻿  TextureDisplay.cpp
+D:\PROJECT FILES\CODES\GDPARCM_ILS\GDPARCM\TextureDisplay.cpp(55,73): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\PROJECT FILES\CODES\GDPARCM_ILS\GDPARCM\TextureDisplay.cpp(60,10): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+D:\PROJECT FILES\CODES\GDPARCM_ILS\GDPARCM\TextureDisplay.cpp(61,10): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+  GDPARCM.vcxproj -> D:\PROJECT FILES\CODES\GDPARCM_ILS\x64\Debug\GDPARCM.exe

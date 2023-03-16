@@ -22,6 +22,10 @@ FPSCounter::~FPSCounter()
 	AObject::~AObject();
 }
 
+void FPSCounter::initialize()
+{
+}
+
 void FPSCounter::Update(sf::Time deltaTime)
 {
 	this->updateFPS(deltaTime);

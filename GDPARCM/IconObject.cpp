@@ -13,6 +13,10 @@ IconObject::IconObject(std::string name, int textureIndex) : AObject(name), text
 	this->sprite->setTexture(*texture);
 }
 
+void IconObject::initialize()
+{
+}
+
 void IconObject::Update(sf::Time deltaTime)
 {
 	

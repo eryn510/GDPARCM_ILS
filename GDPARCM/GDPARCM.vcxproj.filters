@@ -19,6 +19,21 @@
     <Filter Include="Engine\Pooling\Threading">
       <UniqueIdentifier>{1755ba02-6c17-4ada-91f8-edc58a85a0db}</UniqueIdentifier>
     </Filter>
+    <Filter Include="InteractiveLoadingScreen">
+      <UniqueIdentifier>{9a908e3d-d6a1-4a8d-a225-c8db7879b2ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="InteractiveLoadingScreen\IsometricMap">
+      <UniqueIdentifier>{39853c08-1d3b-422f-bb94-9d5f1e21b3d0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="InteractiveLoadingScreen\Character">
+      <UniqueIdentifier>{4fb26a94-f600-45f4-bbeb-e7d80ef393a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="InteractiveLoadingScreen\IsometricObjects">
+      <UniqueIdentifier>{2490f919-26c0-484c-935d-e3914670c0df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="InteractiveLoadingScreen\UI">
+      <UniqueIdentifier>{db799f79-6ddf-40ef-a02f-7bfad0e24e82}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MainLoop.cpp">
@@ -69,6 +84,39 @@
     <ClCompile Include="IWorkerAction.cpp">
       <Filter>Engine\Pooling</Filter>
     </ClCompile>
+    <ClCompile Include="IsometricMapNode.cpp">
+      <Filter>InteractiveLoadingScreen\IsometricMap</Filter>
+    </ClCompile>
+    <ClCompile Include="IsometricMap.cpp">
+      <Filter>InteractiveLoadingScreen\IsometricMap</Filter>
+    </ClCompile>
+    <ClCompile Include="ACharacter.cpp">
+      <Filter>InteractiveLoadingScreen\Character</Filter>
+    </ClCompile>
+    <ClCompile Include="Estelle.cpp">
+      <Filter>InteractiveLoadingScreen\Character</Filter>
+    </ClCompile>
+    <ClCompile Include="Tile.cpp">
+      <Filter>InteractiveLoadingScreen\IsometricObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="AIsometricObject.cpp">
+      <Filter>InteractiveLoadingScreen\IsometricObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="IsometricMapSprite.cpp">
+      <Filter>InteractiveLoadingScreen</Filter>
+    </ClCompile>
+    <ClCompile Include="Joshua.cpp">
+      <Filter>InteractiveLoadingScreen\Character</Filter>
+    </ClCompile>
+    <ClCompile Include="StatusBar.cpp">
+      <Filter>InteractiveLoadingScreen\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UIDisplay.cpp">
+      <Filter>InteractiveLoadingScreen\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="ProgressBar.cpp">
+      <Filter>InteractiveLoadingScreen\UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MainLoop.h">
@@ -118,6 +166,39 @@
     </ClInclude>
     <ClInclude Include="IWorkerAction.h">
       <Filter>Engine\Pooling</Filter>
+    </ClInclude>
+    <ClInclude Include="IsometricMapNode.h">
+      <Filter>InteractiveLoadingScreen\IsometricMap</Filter>
+    </ClInclude>
+    <ClInclude Include="IsometricMap.h">
+      <Filter>InteractiveLoadingScreen\IsometricMap</Filter>
+    </ClInclude>
+    <ClInclude Include="ACharacter.h">
+      <Filter>InteractiveLoadingScreen\Character</Filter>
+    </ClInclude>
+    <ClInclude Include="Estelle.h">
+      <Filter>InteractiveLoadingScreen\Character</Filter>
+    </ClInclude>
+    <ClInclude Include="Tile.h">
+      <Filter>InteractiveLoadingScreen\IsometricObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="AIsometricObject.h">
+      <Filter>InteractiveLoadingScreen\IsometricObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="IsometricMapSprite.h">
+      <Filter>InteractiveLoadingScreen</Filter>
+    </ClInclude>
+    <ClInclude Include="Joshua.h">
+      <Filter>InteractiveLoadingScreen\Character</Filter>
+    </ClInclude>
+    <ClInclude Include="StatusBar.h">
+      <Filter>InteractiveLoadingScreen\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UIDisplay.h">
+      <Filter>InteractiveLoadingScreen\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="ProgressBar.h">
+      <Filter>InteractiveLoadingScreen\UI</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

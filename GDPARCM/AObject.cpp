@@ -18,12 +18,44 @@ std::string AObject::getName()
 	return name;
 }
 
+void AObject::attachChild(AObject* child)
+{
+	this->childList.push_back(child);
+	child->initialize();
+
+	child->parent = this;
+}
+
+void AObject::detachChild(AObject* child)
+{
+	int index = -1;
+	for (int i = 0; i < this->childList.size(); i++) {
+		if (this->childList[i] == child) {
+			index = i;
+		}
+	}
+
+	if (index != -1) {
+		this->childList.erase(this->childList.begin() + index);
+	}
+}
+
 void AObject::Draw(sf::RenderWindow* targetWindow, sf::RenderStates renderStates) 
 {
 	if (this->sprite != NULL) {
 		this->sprite->setPosition(this->posX, this->posY);
 		this->sprite->setScale(this->scaleX, this->scaleY);
-		targetWindow->draw(*this->sprite);
+		if (enabled) {
+			targetWindow->draw(*this->sprite, renderStates);
+			renderStates.transform = this->sprite->getTransform() * renderStates.transform;
+		}
+	}
+
+	for (int i = 0; i < this->childList.size(); i++) {
+		AObject* child = this->childList[i];
+		if (child->isEnabled()) {
+			child->Draw(targetWindow, renderStates);
+		}
 	}
 }
 
@@ -62,6 +94,26 @@ sf::Vector2f AObject::getPosition()
 sf::Vector2f AObject::getScale()
 {
 	return this->sprite->getScale();
+}
+
+std::vector<AObject*> AObject::getChildren()
+{
+	return this->childList;
+}
+
+AObject* AObject::getParent()
+{
+	return this->parent;
+}
+
+void AObject::setEnabled(bool flag)
+{
+	this->enabled = flag;
+}
+
+bool AObject::isEnabled()
+{
+	return this->enabled;
 }
 
 sf::FloatRect AObject::getLocalBounds()

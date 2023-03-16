@@ -18,6 +18,10 @@ BGObject::BGObject(std::string name) : AObject(name)
 	this->setPosition(0, -MainLoop::WINDOW_HEIGHT * 7);
 }
 
+void BGObject::initialize()
+{
+}
+
 void BGObject::Update(sf::Time deltaTime)
 {
 	//make BG scroll slowly
