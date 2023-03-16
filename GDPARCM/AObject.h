@@ -17,6 +17,8 @@ public:
 	void attachChild(AObject* child);
 	void detachChild(AObject* child);
 
+	sf::Sprite* getSprite();
+
 	virtual void setPosition(float x, float y);
 	virtual void setScale(float x, float y);
 	virtual sf::FloatRect getLocalBounds();

@@ -34,6 +34,9 @@
     <Filter Include="InteractiveLoadingScreen\UI">
       <UniqueIdentifier>{db799f79-6ddf-40ef-a02f-7bfad0e24e82}</UniqueIdentifier>
     </Filter>
+    <Filter Include="InteractiveLoadingScreen\Audio">
+      <UniqueIdentifier>{8f01cf31-a3a8-4651-9890-1cb025741fe2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MainLoop.cpp">
@@ -117,6 +120,9 @@
     <ClCompile Include="ProgressBar.cpp">
       <Filter>InteractiveLoadingScreen\UI</Filter>
     </ClCompile>
+    <ClCompile Include="AudioManager.cpp">
+      <Filter>InteractiveLoadingScreen\Audio</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MainLoop.h">
@@ -199,6 +205,9 @@
     </ClInclude>
     <ClInclude Include="ProgressBar.h">
       <Filter>InteractiveLoadingScreen\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="AudioManager.h">
+      <Filter>InteractiveLoadingScreen\Audio</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

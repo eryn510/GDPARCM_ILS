@@ -1,6 +1,7 @@
 #include "StatusBar.h"
 #include <iostream>
 #include "TextureManager.h"
+#include "ProgressBar.h"
 
 StatusBar::StatusBar(std::string name, Character character) : AObject(name), character(character)
 {
@@ -34,6 +35,19 @@ StatusBar::StatusBar(std::string name, Character character) : AObject(name), cha
 	this->attachChild(MPIcon);
 	MPIcon->setScale(0.35, 0.35);
 	MPIcon->setPosition((texture->getSize().x / 2) - 30, (texture->getSize().y / 2));
+
+	ProgressBar* HPProgress = new ProgressBar("HPProgress");
+	this->attachChild(HPProgress);
+	HPProgress->initialize((texture->getSize().x / 2), (texture->getSize().y / 2), 175, 15, sf::Color::Red, 0);
+	HPProgress->setPosition((texture->getSize().x / 2), (texture->getSize().y / 2) - 47.5);
+
+	ProgressBar* MPProgress = new ProgressBar("MPProgress");
+	this->attachChild(MPProgress);
+	MPProgress->initialize((texture->getSize().x / 2), (texture->getSize().y / 2), 175, 15, sf::Color::Blue, 0);
+	MPProgress->setPosition((texture->getSize().x / 2), (texture->getSize().y / 2) - 7.5);
+
+
+
 }
 
 void StatusBar::initialize()

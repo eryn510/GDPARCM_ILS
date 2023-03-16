@@ -8,7 +8,7 @@ Tile::Tile(std::string name) : AIsometricObject(name)
 
 	//assign texture
 	this->sprite = new IsometricMapSprite();
-	sf::Texture* texture = TextureManager::getInstance()->getFromTextureMap("DirtTile", 0);
+	sf::Texture* texture = TextureManager::getInstance()->getFromTextureMap("GrassTile", 0);
 	this->sprite->setTexture(*texture);
 }
 

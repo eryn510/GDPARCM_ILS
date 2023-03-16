@@ -40,6 +40,11 @@ void AObject::detachChild(AObject* child)
 	}
 }
 
+sf::Sprite* AObject::getSprite()
+{
+	return this->sprite;
+}
+
 void AObject::Draw(sf::RenderWindow* targetWindow, sf::RenderStates renderStates) 
 {
 	if (this->sprite != NULL) {

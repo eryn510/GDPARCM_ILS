@@ -46,9 +46,9 @@ void TextureManager::loadStreamingAssets()
 {
 	int index = 0;
 
-	for (const auto& entry : std::filesystem::directory_iterator(STREAMING_PATH)) {
+	for (const auto& entry : std::filesystem::directory_iterator(FRAMES_PATH)) {
 		//simulate loading of very large file
-		IETThread::sleep(200);
+		IETThread::sleep(1);
 
 		String path = entry.path().generic_string();
 		std::vector<String> tokens = StringUtils::split(path, '/');
@@ -64,7 +64,7 @@ void TextureManager::loadSingleStreamAsset(int index, IExecutionEvent* execution
 {
 	int fileNum = 0;
 
-	for (const auto& entry : std::filesystem::directory_iterator(STREAMING_PATH)) {
+	for (const auto& entry : std::filesystem::directory_iterator(FRAMES_PATH)) {
 		if (index == fileNum)
 		{
 
@@ -114,7 +114,7 @@ int TextureManager::getNumLoadedStreamTextures() const
 void TextureManager::countStreamingAssets()
 {
 	this->streamingAssetCount = 0;
-	for (const auto& entry : std::filesystem::directory_iterator(STREAMING_PATH)) {
+	for (const auto& entry : std::filesystem::directory_iterator(FRAMES_PATH)) {
 		this->streamingAssetCount++;
 	}
 	std::cout << "[TextureManager] Number of streaming assets: " << this->streamingAssetCount << std::endl;

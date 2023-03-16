@@ -34,6 +34,7 @@ private:
 	TextureList streamTextureList;
 
 	const std::string STREAMING_PATH = "Media/Streaming/";
+	const std::string FRAMES_PATH = "Media/Frames/";
 	int streamingAssetCount = 0;
 
 	void countStreamingAssets();

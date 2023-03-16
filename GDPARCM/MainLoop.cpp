@@ -9,6 +9,7 @@
 #include "Estelle.h"
 #include "Joshua.h"
 #include "StatusBar.h"
+#include "AudioManager.h"
 #include <iostream>
 
 const sf::Time MainLoop::TIME_PER_FRAME = sf::seconds(1.f / 60.f);
@@ -16,6 +17,7 @@ const sf::Time MainLoop::TIME_PER_FRAME = sf::seconds(1.f / 60.f);
 MainLoop::MainLoop() : mWindow(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "SFML Application"){
     //mWindow.setFramerateLimit(60);
     TextureManager::getInstance()->loadFromAssetList();
+    AudioManager::getInstance()->loadAllAudio();
 
     //load objects
     //BGObject* bgObject = new BGObject("BGObject");
@@ -60,6 +62,7 @@ MainLoop::MainLoop() : mWindow(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "SFML
     ObjectManager::getInstance()->addObject(JoshuaDisplay);
     JoshuaDisplay->initialize();
 
+    AudioManager::getInstance()->play("Battle");
     
 }
 

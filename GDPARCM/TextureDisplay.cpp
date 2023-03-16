@@ -33,7 +33,7 @@ void TextureDisplay::Update(sf::Time deltaTime)
 		//if (this->numDisplayed < 100) 
 		//{
 			this->ticks = 0.0f;
-			//TextureManager::getInstance()->loadSingleStreamAsset(this->numDisplayed, this);
+			TextureManager::getInstance()->loadSingleStreamAsset(this->numDisplayed, this);
 			this->numDisplayed++;
 		//}
 		
@@ -46,7 +46,7 @@ void TextureDisplay::initialize()
 
 void TextureDisplay::onFinishedExecution()
 {
-	spawnObject();
+	//spawnObject();
 }
 
 void TextureDisplay::spawnObject()
@@ -55,20 +55,12 @@ void TextureDisplay::spawnObject()
 	IconObject* iconObj = new IconObject(objectName, this->iconList.size());
 	this->iconList.push_back(iconObj);
 
-	//set position
-	int IMG_WIDTH = 68; int IMG_HEIGHT = 68;
-	float x = this->columnGrid * IMG_WIDTH;
-	float y = this->rowGrid * IMG_HEIGHT;
-	iconObj->setPosition(x, y);
+	sf::Vector2u texSize = iconObj->getSprite()->getTexture()->getSize();
 
-	std::cout << "Set position: " << x << " " << y << std::endl;
+	iconObj->getSprite()->setOrigin(texSize.x / 2, texSize.y / 2);
+	iconObj->setPosition(0, 0);
 
-	this->columnGrid++;
-	if(this->columnGrid == this->MAX_COLUMN)
-	{
-		this->columnGrid = 0;
-		this->rowGrid++;
-	}
+	iconObj->setEnabled(false);
 
 	ObjectManager::getInstance()->addObject(iconObj);
 }

@@ -9,7 +9,7 @@ FPSCounter::FPSCounter(): AObject("FPSCounter")
 
 	this->statsText = new sf::Text();
 	this->statsText->setFont(*font);
-	this->statsText->setPosition(MainLoop::WINDOW_WIDTH - 300, MainLoop::WINDOW_HEIGHT - 200);
+	this->statsText->setPosition((MainLoop::WINDOW_WIDTH / 2) - 300, (MainLoop::WINDOW_HEIGHT / 2) - 200);
 	this->statsText->setOutlineColor(sf::Color(1.0f, 1.0f, 1.0f));
 	this->statsText->setOutlineThickness(2.5f);
 	this->statsText->setCharacterSize(35);
