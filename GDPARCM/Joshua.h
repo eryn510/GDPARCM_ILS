@@ -5,13 +5,14 @@
 class Joshua : public ACharacter
 {
 public:
-	Joshua(std::string name);
+	Joshua(std::string name, int turnIndex);
 
 	// Inherited via ACharacter
 	virtual void initialize() override;
 	virtual void Update(sf::Time deltaTime) override;
 
 	void setIdlePos(sf::Vector2f pos);
+	void reset();
 
 private:
 	int idleCounter = 0;

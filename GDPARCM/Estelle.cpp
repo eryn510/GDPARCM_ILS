@@ -3,9 +3,11 @@
 #include "TextureManager.h"
 #include "MathUtils.h"
 
-Estelle::Estelle(std::string name) : ACharacter(name)
+Estelle::Estelle(std::string name, int turnIndex) : ACharacter(name)
 {
 	std::cout << "Declared as " << name << "\n";
+
+	this->turnIndex = turnIndex;
 
 	//assign texture
 	this->sprite = new IsometricMapSprite();
@@ -15,6 +17,10 @@ Estelle::Estelle(std::string name) : ACharacter(name)
 
 	for (int i = 1; i <= 16; i++)
 		this->attackSprites.push_back(TextureManager::getInstance()->getFromTextureMap("EstelleA" + std::to_string(i), 0));
+
+
+	for (int i = 1; i <= 4; i++)
+		this->standbySprites.push_back(TextureManager::getInstance()->getFromTextureMap("EstelleS" + std::to_string(i), 0));
 
 	sf::Texture* texture = this->idleSprites[idleCounter];
 	this->sprite->setTexture(*texture);
@@ -34,6 +40,7 @@ void Estelle::Update(sf::Time deltaTime)
 	if (state == IDLE) 
 	{
 		attackCounter = 0;
+		standbyCounter = 0;
 
 		if (idleCounter == this->idleSprites.size())
 			idleCounter = 0;
@@ -48,9 +55,29 @@ void Estelle::Update(sf::Time deltaTime)
 		
 	}
 
+	else if (state == STANDBY) 
+	{
+		//WAIT FOR COMMANDS
+
+		//ANIMATION
+		attackCounter = 0;
+		idleCounter = 0;
+
+		if (standbyCounter == this->standbySprites.size())
+			standbyCounter = 0;
+
+		if (totalDeltaTime >= maxAnimupdate)
+		{
+			this->sprite->setTexture(*this->standbySprites[standbyCounter]);
+			this->sprite->setTextureRect(sf::IntRect(0, 0, this->standbySprites[standbyCounter]->getSize().x, this->standbySprites[standbyCounter]->getSize().y));
+			standbyCounter++;
+			totalDeltaTime = 0;
+		}
+	}
+
 	else if (state = ATTACK) 
 	{
-		if (attackCounter == this->attackSprites.size()) {
+		if (attackCounter >= this->attackSprites.size()) {
 			animEnd = true;
 			waitTime += deltaTime.asSeconds();
 		}
@@ -108,7 +135,6 @@ void Estelle::setIdlePos(sf::Vector2f pos)
 
 void Estelle::reset()
 {
-
 	idleCounter = 0;
 	attackCounter = 0;
 	waitTime = 0.0f;

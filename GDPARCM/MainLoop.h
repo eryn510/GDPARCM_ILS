@@ -1,5 +1,5 @@
 #include <SFML/Graphics.hpp>
-#include "Estelle.h"
+#include "ACharacter.h"
 
 class MainLoop {
 public:
@@ -26,7 +26,7 @@ private:
     sf::Text mStatisticsText;
     sf::Time mStatisticsUpdateTime;
 
-    Estelle* estelleRef;
+    CombatLoop* combatLoop;
 
     unsigned int numFrames;
     bool mIsMovingUp = false;

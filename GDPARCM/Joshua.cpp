@@ -3,18 +3,22 @@
 #include "TextureManager.h"
 #include "MathUtils.h"
 
-Joshua::Joshua(std::string name) : ACharacter(name)
+Joshua::Joshua(std::string name, int turnIndex) : ACharacter(name)
 {
 	std::cout << "Declared as " << name << "\n";
+
+	this->turnIndex = turnIndex;
 
 	//assign texture
 	this->sprite = new IsometricMapSprite();
 	for (int i = 1; i <= 8; i++)
 		this->idleSprites.push_back(TextureManager::getInstance()->getFromTextureMap("JoshuaIdle" + std::to_string(i), 0));
 
-
 	for (int i = 1; i <= 14; i++)
 		this->attackSprites.push_back(TextureManager::getInstance()->getFromTextureMap("JoshuaA" + std::to_string(i), 0));
+
+	for (int i = 1; i <= 4; i++)
+		this->standbySprites.push_back(TextureManager::getInstance()->getFromTextureMap("JoshuaS" + std::to_string(i), 0));
 
 	sf::Texture* texture = this->idleSprites[idleCounter];
 	this->sprite->setTexture(*texture);
@@ -33,6 +37,8 @@ void Joshua::Update(sf::Time deltaTime)
 	animDelta += deltaTime.asSeconds();
 	if (state == IDLE)
 	{
+		attackCounter = 0;
+
 		if (idleCounter == this->idleSprites.size())
 			idleCounter = 0;
 
@@ -46,9 +52,29 @@ void Joshua::Update(sf::Time deltaTime)
 
 	}
 
+	else if (state == STANDBY) 
+	{
+		//WAIT FOR COMMAND
+
+		//ANIMATION
+		attackCounter = 0;
+		idleCounter = 0;
+
+		if (standbyCounter == this->standbySprites.size())
+			standbyCounter = 0;
+
+		if (totalDeltaTime >= maxAnimupdate)
+		{
+			this->sprite->setTexture(*this->standbySprites[standbyCounter]);
+			this->sprite->setTextureRect(sf::IntRect(0, 0, this->standbySprites[standbyCounter]->getSize().x, this->standbySprites[standbyCounter]->getSize().y));
+			standbyCounter++;
+			totalDeltaTime = 0;
+		}
+	}
+
 	else if (state = ATTACK)
 	{
-		if (attackCounter == this->attackSprites.size()) {
+		if (attackCounter >= this->attackSprites.size()) {
 			animEnd = true;
 			waitTime += deltaTime.asSeconds();
 		}
@@ -87,8 +113,7 @@ void Joshua::Update(sf::Time deltaTime)
 			}
 			else if (totalDeltaTime > maxMoveTime - 0.5f)
 			{
-				totalDeltaTime = 0;
-				waitTime = 0;
+				reset();
 				this->changeState(IDLE);
 			}
 		}
@@ -102,4 +127,15 @@ void Joshua::Update(sf::Time deltaTime)
 void Joshua::setIdlePos(sf::Vector2f pos)
 {
 	this->idlePos = pos;
+}
+
+void Joshua::reset()
+{
+	idleCounter = 0;
+	attackCounter = 0;
+	waitTime = 0.0f;
+	animDelta = 0.0f;
+	totalDeltaTime = 0;
+	endAttack = false;
+	animEnd = false;
 }

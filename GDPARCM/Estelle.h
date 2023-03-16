@@ -5,7 +5,7 @@
 class Estelle : public ACharacter
 {
 public:
-	Estelle(std::string name);
+	Estelle(std::string name, int turnIndex);
 
 	// Inherited via ACharacter
 	virtual void initialize() override;
@@ -15,8 +15,6 @@ public:
 	void reset();
 
 private:
-	int idleCounter = 0;
-	int attackCounter = 0;
 	float maxAnimupdate = 0.1f;
 	float maxMoveTime = 1.0f;
 	float waitTime = 0.0f;

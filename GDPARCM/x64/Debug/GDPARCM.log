@@ -1,13 +1,3 @@
-﻿  TextureDisplay.cpp
-D:\PROJECT FILES\CODES\GDPARCM_ILS\GDPARCM\TextureDisplay.cpp(55,73): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-D:\PROJECT FILES\CODES\GDPARCM_ILS\GDPARCM\TextureDisplay.cpp(60,59): warning C4244: 'argument': conversion from 'T' to 'float', possible loss of data
-          with
-          [
-              T=unsigned int
-          ]
-D:\PROJECT FILES\CODES\GDPARCM_ILS\GDPARCM\TextureDisplay.cpp(60,44): warning C4244: 'argument': conversion from 'T' to 'float', possible loss of data
-          with
-          [
-              T=unsigned int
-          ]
+﻿  Joshua.cpp
+D:\PROJECT FILES\CODES\GDPARCM_ILS\GDPARCM\Joshua.h(1,9): warning C4068: unknown pragma 'oncepragma'
   GDPARCM.vcxproj -> D:\PROJECT FILES\CODES\GDPARCM_ILS\x64\Debug\GDPARCM.exe

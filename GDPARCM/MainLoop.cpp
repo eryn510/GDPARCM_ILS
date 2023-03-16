@@ -8,8 +8,10 @@
 #include "IsometricMap.h"
 #include "Estelle.h"
 #include "Joshua.h"
+#include "Enemy.h"
 #include "StatusBar.h"
 #include "AudioManager.h"
+#include "CombatLoop.h"
 #include <iostream>
 
 const sf::Time MainLoop::TIME_PER_FRAME = sf::seconds(1.f / 60.f);
@@ -26,21 +28,10 @@ MainLoop::MainLoop() : mWindow(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "SFML
 
     IsometricMap* isoMap = new IsometricMap(32,32);
     isoMap->initializeMap();
+    
+    CombatLoop::getInstance()->InitCharacters();
 
-    Joshua* joshua = new Joshua("Joshua");
-    joshua->setScale(2, 2);
-    joshua->setPosition(-128, -64);
-    joshua->setIdlePos(sf::Vector2f(-128, -64));
-    joshua->changeState(IDLE);
-    ObjectManager::getInstance()->addObject(joshua);
-
-    Estelle* estelle = new Estelle("Estelle");
-    estelleRef = estelle;
-    estelle->setScale(2, 2);
-    estelle->setPosition(-32, 32);
-    estelle->setIdlePos(sf::Vector2f(-32,32));
-    estelle->changeState(IDLE);
-    ObjectManager::getInstance()->addObject(estelle);
+    //charRef = enemy;
 
 
     TextureDisplay* display = new TextureDisplay();
@@ -118,9 +109,8 @@ void MainLoop::handlePlayerInput(sf::Keyboard::Key key, bool isPressed) {
 
 void MainLoop::update(sf::Time deltaTime)
 {
+    CombatLoop::getInstance()->update(deltaTime);
     ObjectManager::getInstance()->update(deltaTime);
-    if (mIsMovingUp)
-        estelleRef->changeState(ATTACK);
 }
 
 void MainLoop::render() {

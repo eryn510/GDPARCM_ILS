@@ -138,6 +138,8 @@
     <ClCompile Include="AIsometricObject.cpp" />
     <ClCompile Include="AudioManager.cpp" />
     <ClCompile Include="BGObject.cpp" />
+    <ClCompile Include="CombatLoop.cpp" />
+    <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Estelle.cpp" />
     <ClCompile Include="FPSCounter.cpp" />
     <ClCompile Include="IconObject.cpp" />
@@ -168,6 +170,8 @@
     <ClInclude Include="AIsometricObject.h" />
     <ClInclude Include="AudioManager.h" />
     <ClInclude Include="BGObject.h" />
+    <ClInclude Include="CombatLoop.h" />
+    <ClInclude Include="Enemy.h" />
     <ClInclude Include="Estelle.h" />
     <ClInclude Include="FPSCounter.h" />
     <ClInclude Include="IconObject.h" />
