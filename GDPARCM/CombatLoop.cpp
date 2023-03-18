@@ -40,15 +40,6 @@ void CombatLoop::InitCharacters()
     ObjectManager::getInstance()->addObject(estelle);
     characters.push_back(estelle);
 
-    //MIDDLE
-    Enemy* enemy = new Enemy("Enemy", 2);
-    enemy->setScale(3, 3);
-    enemy->setPosition(128, -240);
-    enemy->setIdlePos(sf::Vector2f(128, -240));
-    enemy->changeState(IDLE);
-    ObjectManager::getInstance()->addObject(enemy);
-    characters.push_back(enemy);
-
     //UPPER
     Enemy* enemy2 = new Enemy("Enemy2", 3);
     enemy2->setScale(3, 3);
@@ -57,6 +48,15 @@ void CombatLoop::InitCharacters()
     enemy2->changeState(IDLE);
     ObjectManager::getInstance()->addObject(enemy2);
     characters.push_back(enemy2);
+
+    //MIDDLE
+    Enemy* enemy = new Enemy("Enemy", 2);
+    enemy->setScale(3, 3);
+    enemy->setPosition(128, -240);
+    enemy->setIdlePos(sf::Vector2f(128, -240));
+    enemy->changeState(IDLE);
+    ObjectManager::getInstance()->addObject(enemy);
+    characters.push_back(enemy);
 
     //LOWER
     Enemy* enemy3 = new Enemy("Enemy3", 4);
@@ -74,6 +74,8 @@ void CombatLoop::InitCharacters()
 
     sf::Vector2u optionTextureSize = optionBox->getSprite()->getTexture()->getSize();
 
+    optionBox->setPosition((MainLoop::WINDOW_WIDTH / 2) - (optionTextureSize.x / 2), (MainLoop::WINDOW_HEIGHT / 2) - (optionTextureSize.y / 2));
+
     SelectorOption* selector = new SelectorOption("AttackSelect");
     optionBox->attachChild(selector);
     selector->initialize("Attack", optionTextureSize, sf::Vector2f(0, -100));
@@ -89,8 +91,16 @@ void CombatLoop::InitCharacters()
     selector3->initialize("Special", optionTextureSize, sf::Vector2f(0, 100));
     options.push_back(selector3);
 
+
+    UIDisplay* SCraftReady = new UIDisplay("SCraftReady", TextureManager::getInstance()->getFromTextureMap("SCraftReady", 0));
+    SCraftReady->setScale(0.75, 0.75);
+    SCraftReady->setPosition(0, -250);
+    SCraftReady->setEnabled(false);
+    this->readyDisplay = SCraftReady;
+    ObjectManager::getInstance()->addObject(SCraftReady);
+
     load = new ProgressBar("loadBar");
-    load->initialize(-(MainLoop::WINDOW_WIDTH / 2), -(MainLoop::WINDOW_HEIGHT / 2), MainLoop::WINDOW_WIDTH, 50, sf::Color::Green, 0);
+    load->initialize(-(MainLoop::WINDOW_WIDTH / 2), -(MainLoop::WINDOW_HEIGHT / 2), MainLoop::WINDOW_WIDTH, 5, sf::Color::Green, 0);
     load->setFill(0);
     ObjectManager::getInstance()->addObject(load);
 }
@@ -114,6 +124,9 @@ void CombatLoop::update(sf::Time deltaTime)
 {
     if (!onSkillCutIn)
     {
+        if (hasLoaded)
+            this->readyDisplay->setEnabled(true);
+
         for (int i = 0; i < characters.size(); i++)
         {
             if (characters[i]->turnIndex == (currentTurn % characters.size()) && !hasSelected)
@@ -181,6 +194,7 @@ void CombatLoop::update(sf::Time deltaTime)
                 else if (optionSelected == 1)
                 {
                     this->optionBoxRef->setEnabled(false);
+                	options[optionSelected]->isCurrentlySelected = false;
                     this->currentCharacter->changeState(IDLE);
                     this->currentCharacter->reset();
                     goNext();

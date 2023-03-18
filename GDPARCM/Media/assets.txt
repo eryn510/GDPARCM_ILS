@@ -108,3 +108,4 @@ Media/UI/UIBox.png
 Media/UI/SkillCutInJoshua.png
 Media/UI/SkillCutInEstelle.png
 Media/UI/Menu.jpeg
+Media/UI/SCraftReady.png

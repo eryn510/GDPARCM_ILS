@@ -103,7 +103,7 @@ void Enemy::Update(sf::Time deltaTime)
 		if (attackCounter >= this->attackSprites.size()) {
 			animEnd = true;
 			waitTime += deltaTime.asSeconds();
-			std::cout << "END" << std::endl;
+			//std::cout << "END" << std::endl;
 		}
 
 		if (animDelta >= ((maxMoveTime) / (float)this->attackSprites.size()) && attackCounter < this->attackSprites.size() && endAttack)

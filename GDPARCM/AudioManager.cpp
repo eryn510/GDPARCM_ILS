@@ -20,6 +20,9 @@ void AudioManager::loadAllAudio() {
 
 	loadAudio("Intro", "Media/Audio/TrailsInTheSkyIntro.ogg");
 
+	loadAudio("MainMenu", "Media/Audio/TrailsMainMenu.ogg");
+	AudioManager::getInstance()->getAudio("MainMenu")->setLoop(true);
+
 	//SFX LOADING
 	loadAudio("Select", "Media/Audio/SFX/Select.wav");
 	loadAudio("Hover", "Media/Audio/SFX/Hover.wav");

@@ -72,5 +72,6 @@ private:
 
 	AObject* optionBoxRef;
 	Transition* transitionBox = nullptr;
+	UIDisplay* readyDisplay = nullptr;
 };
 
