@@ -9,6 +9,7 @@ public:
 	virtual ~AObject();
 	virtual void initialize() = 0;
 
+	virtual void processInput(sf::Event event) = 0;
 	virtual void Update(sf::Time deltaTime) = 0;
 	virtual void Draw(sf::RenderWindow* targetWindow, sf::RenderStates renderStates);
 
@@ -20,6 +21,7 @@ public:
 	sf::Sprite* getSprite();
 
 	virtual void setPosition(float x, float y);
+	virtual void setPosition(sf::Vector2f pos);
 	virtual void setScale(float x, float y);
 	virtual sf::FloatRect getLocalBounds();
 	virtual sf::Vector2f getPosition();

@@ -15,6 +15,8 @@ public:
 	// Inherited via AObject
 	virtual void initialize() override;
 
+	virtual void processInput(sf::Event event) override;
+
 	// Inherited via IExecutionEvent
 	virtual void onFinishedExecution() override;
 
@@ -27,13 +29,11 @@ private:
 	const StreamingType streamingType = SINGLE_STREAM;
 	float ticks = 0.0f;
 	bool startedStreaming = false;
+	
+	int texIndex = 0;
+	int loadedTex = 0;
 
-	int columnGrid = 0; int rowGrid = 0;
-	int numDisplayed = 0;
-	const int MAX_COLUMN = 28;
-	const int MAX_ROW = 22;
-
-	void spawnObject();
+	void checkProgress();
 
 };
 

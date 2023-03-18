@@ -29,5 +29,20 @@ public:
 	{
 		return std::floor(static_cast<float>(vm.height) * (percent / 100.f));
 	}
+
+	static float random()
+	{
+		return rand() / (RAND_MAX + 1.0f);
+	}
+
+	static float randomFloat(float min, float max)
+	{
+		return min + (max - min) * random();
+	}
+
+	static int randomInt(int min, int max)
+	{
+		return min + (rand() % max);
+	}
 };
 

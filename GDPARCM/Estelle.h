@@ -9,10 +9,11 @@ public:
 
 	// Inherited via ACharacter
 	virtual void initialize() override;
+	virtual void processInput(sf::Event event) override;
 	virtual void Update(sf::Time deltaTime) override;
 
 	void setIdlePos(sf::Vector2f pos);
-	void reset();
+	virtual void reset() override;
 
 private:
 	float maxAnimupdate = 0.1f;

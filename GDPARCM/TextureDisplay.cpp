@@ -1,9 +1,14 @@
 #include "TextureDisplay.h"
 #include <iostream>
+
+#include "AudioManager.h"
 #include "TextureManager.h"
 #include "MainLoop.h"
 #include "ObjectManager.h"
 #include "IconObject.h"
+#include "ObjectPlayer.h"
+#include "CombatLoop.h"
+
 TextureDisplay::TextureDisplay(): AObject("TextureDisplay")
 {
 	
@@ -12,7 +17,7 @@ TextureDisplay::TextureDisplay(): AObject("TextureDisplay")
 
 void TextureDisplay::Update(sf::Time deltaTime)
 {
-	this->ticks += MainLoop::TIME_PER_FRAME.asMilliseconds();
+	this->ticks += deltaTime.asMilliseconds();
 	
 	if (this->streamingType == StreamingType::BATCH_LOAD && !this->startedStreaming && this->ticks > this->STREAMING_LOAD_DELAY) 
 	{
@@ -33,8 +38,8 @@ void TextureDisplay::Update(sf::Time deltaTime)
 		//if (this->numDisplayed < 100) 
 		//{
 			this->ticks = 0.0f;
-			TextureManager::getInstance()->loadSingleStreamAsset(this->numDisplayed, this);
-			this->numDisplayed++;
+			TextureManager::getInstance()->loadSingleStreamAsset(this->texIndex, this);
+			this->texIndex++;
 		//}
 		
 	}
@@ -44,24 +49,26 @@ void TextureDisplay::initialize()
 {
 }
 
-void TextureDisplay::onFinishedExecution()
+void TextureDisplay::processInput(sf::Event event)
 {
-	//spawnObject();
 }
 
-void TextureDisplay::spawnObject()
+void TextureDisplay::onFinishedExecution()
 {
-	std::string objectName = "Icon_" + std::to_string(this->iconList.size());
-	IconObject* iconObj = new IconObject(objectName, this->iconList.size());
-	this->iconList.push_back(iconObj);
+	checkProgress();
+}
 
-	sf::Vector2u texSize = iconObj->getSprite()->getTexture()->getSize();
+void TextureDisplay::checkProgress()
+{
+	loadedTex++;
 
-	iconObj->getSprite()->setOrigin(texSize.x / 2, texSize.y / 2);
-	iconObj->setPosition(0, 0);
+	CombatLoop::getInstance()->load->setFill((float)this->loadedTex / (float)TextureManager::getInstance()->getStreamingCount());
 
-	iconObj->setEnabled(false);
-
-	ObjectManager::getInstance()->addObject(iconObj);
+	if (this->loadedTex >= TextureManager::getInstance()->getStreamingCount())
+	{
+		CombatLoop::getInstance()->hasLoaded = true;
+		AudioManager::getInstance()->getAudio("SCraftReady")->play();
+		this->setEnabled(false);
+	}
 }
 

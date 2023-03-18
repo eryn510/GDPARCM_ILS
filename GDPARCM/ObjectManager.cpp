@@ -20,7 +20,7 @@ void ObjectManager::update(sf::Time deltaTime) {
 
 void ObjectManager::processInput(sf::Event event) {
 	for (int i = 0; i < this->objectList.size(); i++) {
-		//this->objectList[i]->processInput(event);
+		this->objectList[i]->processInput(event);
 	}
 }
 
@@ -63,6 +63,13 @@ void ObjectManager::deleteObjectByName(std::string name)
 
 	if (temp != NULL)
 		delete temp;
+}
+
+void ObjectManager::disableAll()
+{
+	for (int i = 0; i < objectList.size(); i++) {
+		objectList[i]->setEnabled(false);
+	}
 }
 
 AObject* ObjectManager::findObject(AObject *obj)

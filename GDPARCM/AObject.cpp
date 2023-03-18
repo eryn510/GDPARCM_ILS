@@ -80,6 +80,17 @@ void AObject::setPosition(float x, float y)
 	}
 }
 
+void AObject::setPosition(sf::Vector2f pos)
+{
+	this->posX = pos.x;
+	this->posY = pos.y;
+
+	if (this->sprite != nullptr)
+	{
+		this->sprite->setPosition(this->posX, this->posY);
+	}
+}
+
 void AObject::setScale(float x, float y)
 {
 	this->scaleX = x;

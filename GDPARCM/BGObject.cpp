@@ -22,6 +22,10 @@ void BGObject::initialize()
 {
 }
 
+void BGObject::processInput(sf::Event event)
+{
+}
+
 void BGObject::Update(sf::Time deltaTime)
 {
 	//make BG scroll slowly

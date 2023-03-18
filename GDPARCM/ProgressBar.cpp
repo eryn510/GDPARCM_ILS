@@ -40,6 +40,10 @@ void ProgressBar::Update(sf::Time deltaTime)
 {
 }
 
+void ProgressBar::processInput(sf::Event event)
+{
+}
+
 void ProgressBar::Draw(sf::RenderWindow* targetWindow, sf::RenderStates renderStates)
 {
 	AObject::Draw(targetWindow, renderStates);
@@ -76,4 +80,10 @@ sf::Vector2f ProgressBar::getPosition()
 sf::Vector2f ProgressBar::getScale()
 {
 	return this->back->getScale();
+}
+
+void ProgressBar::setFill(float percentage)
+{
+	this->inner->setSize(sf::Vector2f(this->maxWidth * percentage, this->inner->getSize().y));
+	this->currentFill = percentage;
 }

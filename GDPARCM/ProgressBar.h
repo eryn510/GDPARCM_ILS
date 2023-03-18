@@ -12,6 +12,7 @@ public:
 		sf::Color inner_color, unsigned character_size, sf::Font* font = NULL);
 
 	virtual void Update(sf::Time deltaTime) override;
+	virtual void processInput(sf::Event event) override;
 	virtual void Draw(sf::RenderWindow* targetWindow, sf::RenderStates renderStates) override;
 
 	virtual void setPosition(float x, float y) override;
@@ -19,6 +20,10 @@ public:
 
 	virtual sf::Vector2f getPosition() override;
 	virtual sf::Vector2f getScale() override;
+
+	void setFill(float percentage);
+
+	float currentFill = 0.0f;
 
 private:
 	std::string barString;

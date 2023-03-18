@@ -1,5 +1,8 @@
 #include "Enemy.h"
 #include <iostream>
+
+#include "AudioManager.h"
+#include "CombatLoop.h"
 #include "TextureManager.h"
 #include "MathUtils.h"
 
@@ -14,11 +17,21 @@ Enemy::Enemy(std::string name,int turnIndex) : ACharacter(name)
 	for (int i = 1; i <= 8; i++)
 		this->idleSprites.push_back(TextureManager::getInstance()->getFromTextureMap("EnemyIdle" + std::to_string(i), 0));
 
-	for (int i = 1; i <= 8; i++)
+	for (int i = 1; i <= 16; i++)
 		this->attackSprites.push_back(TextureManager::getInstance()->getFromTextureMap("EnemyA" + std::to_string(i), 0));
 
 	for (int i = 1; i <= 8; i++)
 		this->standbySprites.push_back(TextureManager::getInstance()->getFromTextureMap("EnemyS" + std::to_string(i), 0));
+
+	//assign audio
+	for (int i = 1; i <= 1; i++)
+		this->standbySFX.push_back(AudioManager::getInstance()->getAudio("EnemyS" + std::to_string(i)));
+	/*
+	for (int i = 1; i <= 3; i++)
+		this->attackSFX.push_back(AudioManager::getInstance()->getAudio("EnemyA" + std::to_string(i)));
+	*/
+	for (int i = 1; i <= 1; i++)
+		this->damageSFX.push_back(AudioManager::getInstance()->getAudio("EnemyD" + std::to_string(i)));
 
 	sf::Texture* texture = this->idleSprites[idleCounter];
 	this->sprite->setTexture(*texture);
@@ -28,6 +41,10 @@ Enemy::Enemy(std::string name,int turnIndex) : ACharacter(name)
 }
 
 void Enemy::initialize()
+{
+}
+
+void Enemy::processInput(sf::Event event)
 {
 }
 
@@ -54,8 +71,11 @@ void Enemy::Update(sf::Time deltaTime)
 
 	else if (state == STANDBY)
 	{
+		CombatLoop::getInstance()->enemyMove();
+
 		//WAIT FOR COMMAND
-		
+		attackTimer += deltaTime.asSeconds();
+
 		//ANIMATION
 		attackCounter = 0;
 		idleCounter = 0;
@@ -70,16 +90,23 @@ void Enemy::Update(sf::Time deltaTime)
 			standbyCounter++;
 			totalDeltaTime = 0;
 		}
+
+		if (attackTimer >= attackDelay)
+		{
+			this->changeState(ATTACK);
+			attackTimer = 0;
+		}
 	}
 
-	else if (state = ATTACK)
+	else if (state == ATTACK)
 	{
 		if (attackCounter >= this->attackSprites.size()) {
 			animEnd = true;
 			waitTime += deltaTime.asSeconds();
+			std::cout << "END" << std::endl;
 		}
 
-		if (animDelta >= (maxMoveTime) / (float)this->attackSprites.size() && attackCounter < this->attackSprites.size() && endAttack)
+		if (animDelta >= ((maxMoveTime) / (float)this->attackSprites.size()) && attackCounter < this->attackSprites.size() && endAttack)
 		{
 			this->sprite->setTexture(*this->attackSprites[attackCounter]);
 			this->sprite->setTextureRect(sf::IntRect(0, 0, this->attackSprites[attackCounter]->getSize().x, this->attackSprites[attackCounter]->getSize().y));
@@ -89,7 +116,7 @@ void Enemy::Update(sf::Time deltaTime)
 			attackCounter++;
 		}
 
-		if (totalDeltaTime <= maxMoveTime && !endAttack)
+		if (totalDeltaTime < maxMoveTime && !endAttack)
 		{
 			if (animDelta >= (maxMoveTime) / (float)this->attackSprites.size())
 			{
@@ -99,28 +126,37 @@ void Enemy::Update(sf::Time deltaTime)
 				animDelta = 0;
 				std::cout << attackCounter << std::endl;
 			}
-			this->setPosition(MathUtils::lerp(this->idlePos, sf::Vector2f(128, -128), totalDeltaTime / maxMoveTime));
+			this->setPosition(MathUtils::lerp(this->idlePos, sf::Vector2f(0, -256), totalDeltaTime / maxMoveTime));
 		}
 
-		else
+		else if (totalDeltaTime >= maxMoveTime && !endAttack)
+		{
+			CombatLoop* loopRef = CombatLoop::getInstance();
+
+			loopRef->characters[0]->damageSFX[MathUtils::randomInt(0, (int)loopRef->characters[0]->damageSFX.size())]->play();
+			loopRef->characters[1]->damageSFX[MathUtils::randomInt(0, (int)loopRef->characters[1]->damageSFX.size())]->play();
+			sf::Sound* sound = AudioManager::getInstance()->getAudio("MetalPunch");
+			sound->setVolume(100);
+			sound->play();
 			endAttack = true;
+		}
 
 		if (animEnd && waitTime >= 2.0f)
 		{
 			if (totalDeltaTime <= maxMoveTime - 0.5f)
 			{
-				this->setPosition(MathUtils::lerp(sf::Vector2f(128, -128), this->idlePos, totalDeltaTime / (maxMoveTime - 0.5f)));
+				this->setPosition(MathUtils::lerp(sf::Vector2f(0, -256), this->idlePos, totalDeltaTime / (maxMoveTime - 0.5f)));
 			}
 			else if (totalDeltaTime > maxMoveTime - 0.5f)
 			{
 				reset();
+				CombatLoop::getInstance()->goNext();
 				this->changeState(IDLE);
 			}
 		}
 		else if (animEnd && waitTime < 3.0f)
 		{
 			totalDeltaTime = 0;
-
 		}
 	}
 }

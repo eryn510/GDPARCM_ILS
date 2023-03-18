@@ -2,6 +2,7 @@
 #include <iostream>
 #include "TextureManager.h"
 #include "ProgressBar.h"
+#include "CombatLoop.h"
 
 StatusBar::StatusBar(std::string name, Character character) : AObject(name), character(character)
 {
@@ -36,6 +37,11 @@ StatusBar::StatusBar(std::string name, Character character) : AObject(name), cha
 	MPIcon->setScale(0.35, 0.35);
 	MPIcon->setPosition((texture->getSize().x / 2) - 30, (texture->getSize().y / 2));
 
+	UIDisplay* SPIcon = new UIDisplay("SPIcon", TextureManager::getInstance()->getFromTextureMap("SP", 0));
+	this->attachChild(SPIcon);
+	SPIcon->setScale(0.35, 0.35);
+	SPIcon->setPosition((texture->getSize().x / 2) - 30, (texture->getSize().y / 2) + 40);
+
 	ProgressBar* HPProgress = new ProgressBar("HPProgress");
 	this->attachChild(HPProgress);
 	HPProgress->initialize((texture->getSize().x / 2), (texture->getSize().y / 2), 175, 15, sf::Color::Red, 0);
@@ -46,6 +52,11 @@ StatusBar::StatusBar(std::string name, Character character) : AObject(name), cha
 	MPProgress->initialize((texture->getSize().x / 2), (texture->getSize().y / 2), 175, 15, sf::Color::Blue, 0);
 	MPProgress->setPosition((texture->getSize().x / 2), (texture->getSize().y / 2) - 7.5);
 
+	ProgressBar* SPProgress = new ProgressBar("SPProgress");
+	this->attachChild(SPProgress);
+	SPProgress->initialize((texture->getSize().x / 2), (texture->getSize().y / 2), 175, 15, sf::Color::Green, 0);
+	SPProgress->setPosition((texture->getSize().x / 2), (texture->getSize().y / 2) + 32.5);
+	this->spBar = SPProgress;
 
 
 }
@@ -55,6 +66,11 @@ void StatusBar::initialize()
 	
 }
 
+void StatusBar::processInput(sf::Event event)
+{
+}
+
 void StatusBar::Update(sf::Time deltaTime)
 {
+	this->spBar->setFill(CombatLoop::getInstance()->load->currentFill);
 }

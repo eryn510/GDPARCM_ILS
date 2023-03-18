@@ -17,6 +17,10 @@ void IconObject::initialize()
 {
 }
 
+void IconObject::processInput(sf::Event event)
+{
+}
+
 void IconObject::Update(sf::Time deltaTime)
 {
 	

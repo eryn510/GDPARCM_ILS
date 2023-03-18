@@ -18,6 +18,8 @@ public:
 	void deleteObject(AObject *obj);
 	void deleteObjectByName(std::string name);
 
+	void disableAll();
+
 	AObject* findObject(AObject *obj);
 	AObject* findObjectByName(std::string name);
 

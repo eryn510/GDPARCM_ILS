@@ -12,12 +12,16 @@
 #include "StatusBar.h"
 #include "AudioManager.h"
 #include "CombatLoop.h"
+#include "Transition.h"
 #include <iostream>
 
 const sf::Time MainLoop::TIME_PER_FRAME = sf::seconds(1.f / 60.f);
 
-MainLoop::MainLoop() : mWindow(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "SFML Application"){
+MainLoop::MainLoop() : mWindow(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "SFML Application", sf::Style::Fullscreen){
     //mWindow.setFramerateLimit(60);
+    //mWindow.setKeyRepeatEnabled(false);
+    //mWindow.setVerticalSyncEnabled(false);
+
     TextureManager::getInstance()->loadFromAssetList();
     AudioManager::getInstance()->loadAllAudio();
 
@@ -53,8 +57,38 @@ MainLoop::MainLoop() : mWindow(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "SFML
     ObjectManager::getInstance()->addObject(JoshuaDisplay);
     JoshuaDisplay->initialize();
 
+    sf::Texture* estelleCutInTex = TextureManager::getInstance()->getFromTextureMap("SkillCutInEstelle", 0);
+    UIDisplay* estelleCutIn = new UIDisplay("estelleCutIn", estelleCutInTex, 0);
+    estelleCutIn->getSprite()->setOrigin((float)estelleCutInTex->getSize().x / 2.0f, (float)estelleCutInTex->getSize().y);
+    //STARTPOS
+    estelleCutIn->setPosition(-(float)estelleCutInTex->getSize().x / 2.0f, -(float)estelleCutInTex->getSize().y / 2);
+    //ENDPOS
+    //estelleCutIn->setPosition(0, estelleCutInTex->getSize().y / 2);
+    ObjectManager::getInstance()->addObject(estelleCutIn);
+    CombatLoop::getInstance()->skillCutIns.push_back(estelleCutIn);
+
+    sf::Texture* joshuaCutInTex = TextureManager::getInstance()->getFromTextureMap("SkillCutInJoshua", 0);
+    UIDisplay* joshuaCutIn = new UIDisplay("joshuaCutIn", joshuaCutInTex, 0);
+    joshuaCutIn->getSprite()->setOrigin((float)joshuaCutInTex->getSize().x / 2.0f, 0);
+    //STARTPOS
+    joshuaCutIn->setPosition((float)joshuaCutInTex->getSize().x / 2.0f, (float)joshuaCutInTex->getSize().y / 2);
+    //ENDPOS
+    //joshuaCutIn->setPosition(0, -((float)joshuaCutInTex->getSize().y / 2));
+    ObjectManager::getInstance()->addObject(joshuaCutIn);
+    CombatLoop::getInstance()->skillCutIns.push_back(joshuaCutIn);
+
     AudioManager::getInstance()->play("Battle");
-    
+
+    Box* backBox = new Box("BackBox", sf::Color::Black);
+    backBox->initialize();
+    this->backBox = backBox;
+    ObjectManager::getInstance()->addObject(backBox);
+
+    Transition* transition = new Transition("FirstTransition", 3.0);
+    transition->initialize();
+    this->transitionBox = transition;
+    ObjectManager::getInstance()->addObject(transition);
+
 }
 
 void MainLoop::run()
@@ -82,17 +116,10 @@ void MainLoop::processEvents() {
     if (this->mWindow.pollEvent(event)) {
         switch (event.type) {
 
-        default: ObjectManager::getInstance()->processInput(event); break;
+        default: ObjectManager::getInstance()->processInput(event); CombatLoop::getInstance()->processInput(event); break;
         case sf::Event::Closed:
             this->mWindow.close();
             break;
-        case sf::Event::KeyPressed:
-            handlePlayerInput(event.key.code, true);
-            break;
-        case sf::Event::KeyReleased:
-            handlePlayerInput(event.key.code, false);
-            break;
-
         }
     }
 }
@@ -109,7 +136,17 @@ void MainLoop::handlePlayerInput(sf::Keyboard::Key key, bool isPressed) {
 
 void MainLoop::update(sf::Time deltaTime)
 {
-    CombatLoop::getInstance()->update(deltaTime);
+    if (transitionBox->isFinished)
+    {
+        backBox->setEnabled(false);
+        CombatLoop::getInstance()->update(deltaTime);
+    }
+    else
+    {
+        transitionBox->setEnabled(true);
+        backBox->setEnabled(true);
+    }
+
     ObjectManager::getInstance()->update(deltaTime);
 }
 

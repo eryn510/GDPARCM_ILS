@@ -2,7 +2,7 @@
 #include <iostream>
 #include "MathUtils.h"
 
-AIsometricObject::AIsometricObject(std::string name) : AObject(name)
+AIsometricObject::AIsometricObject(std::string name) : AObject(name), name(name)
 {
 
 }
@@ -45,6 +45,12 @@ void AIsometricObject::Update(sf::Time deltaTime)
 {
 	// Add Implementation here
 }
+
+void AIsometricObject::processInput(sf::Event event)
+{
+	
+}
+
 
 void AIsometricObject::setPosition(float x, float y)
 {

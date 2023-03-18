@@ -138,6 +138,7 @@
     <ClCompile Include="AIsometricObject.cpp" />
     <ClCompile Include="AudioManager.cpp" />
     <ClCompile Include="BGObject.cpp" />
+    <ClCompile Include="Box.cpp" />
     <ClCompile Include="CombatLoop.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Estelle.cpp" />
@@ -154,8 +155,10 @@
     <ClCompile Include="AObject.cpp" />
     <ClCompile Include="MathUtils.cpp" />
     <ClCompile Include="ObjectManager.cpp" />
+    <ClCompile Include="ObjectPlayer.cpp" />
     <ClCompile Include="PoolWorkerThread.cpp" />
     <ClCompile Include="ProgressBar.cpp" />
+    <ClCompile Include="SelectorOption.cpp" />
     <ClCompile Include="StatusBar.cpp" />
     <ClCompile Include="StreamAssetLoader.cpp" />
     <ClCompile Include="StringUtils.cpp" />
@@ -163,6 +166,8 @@
     <ClCompile Include="TextureDisplay.cpp" />
     <ClCompile Include="TextureManager.cpp" />
     <ClCompile Include="ThreadPool.cpp" />
+    <ClCompile Include="Transition.cpp" />
+    <ClCompile Include="UIBox.cpp" />
     <ClCompile Include="UIDisplay.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -170,6 +175,7 @@
     <ClInclude Include="AIsometricObject.h" />
     <ClInclude Include="AudioManager.h" />
     <ClInclude Include="BGObject.h" />
+    <ClInclude Include="Box.h" />
     <ClInclude Include="CombatLoop.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Estelle.h" />
@@ -186,8 +192,10 @@
     <ClInclude Include="AObject.h" />
     <ClInclude Include="MathUtils.h" />
     <ClInclude Include="ObjectManager.h" />
+    <ClInclude Include="ObjectPlayer.h" />
     <ClInclude Include="PoolWorkerThread.h" />
     <ClInclude Include="ProgressBar.h" />
+    <ClInclude Include="SelectorOption.h" />
     <ClInclude Include="StatusBar.h" />
     <ClInclude Include="StreamAssetLoader.h" />
     <ClInclude Include="StringUtils.h" />
@@ -195,6 +203,8 @@
     <ClInclude Include="TextureDisplay.h" />
     <ClInclude Include="TextureManager.h" />
     <ClInclude Include="ThreadPool.h" />
+    <ClInclude Include="Transition.h" />
+    <ClInclude Include="UIBox.h" />
     <ClInclude Include="UIDisplay.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

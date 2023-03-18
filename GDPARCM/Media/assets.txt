@@ -83,6 +83,14 @@ Media/Characters/Enemy/Attack/EnemyA5.png
 Media/Characters/Enemy/Attack/EnemyA6.png
 Media/Characters/Enemy/Attack/EnemyA7.png
 Media/Characters/Enemy/Attack/EnemyA8.png
+Media/Characters/Enemy/Attack/EnemyA9.png
+Media/Characters/Enemy/Attack/EnemyA10.png
+Media/Characters/Enemy/Attack/EnemyA11.png
+Media/Characters/Enemy/Attack/EnemyA12.png
+Media/Characters/Enemy/Attack/EnemyA13.png
+Media/Characters/Enemy/Attack/EnemyA14.png
+Media/Characters/Enemy/Attack/EnemyA15.png
+Media/Characters/Enemy/Attack/EnemyA16.png
 Media/Characters/Enemy/Standby/EnemyS1.png
 Media/Characters/Enemy/Standby/EnemyS2.png
 Media/Characters/Enemy/Standby/EnemyS3.png
@@ -94,3 +102,9 @@ Media/Characters/Enemy/Standby/EnemyS8.png
 Media/UI/StatusBar.png
 Media/UI/HP.png
 Media/UI/MP.png
+Media/UI/SP.png
+Media/UI/Selector.png
+Media/UI/UIBox.png
+Media/UI/SkillCutInJoshua.png
+Media/UI/SkillCutInEstelle.png
+Media/UI/Menu.jpeg

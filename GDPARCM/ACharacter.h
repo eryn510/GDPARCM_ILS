@@ -1,6 +1,7 @@
 #pragma once
 #include "AIsometricObject.h"
 #include <vector>
+#include "SFML/Audio.hpp"
 
 enum STATE
 {
@@ -20,7 +21,13 @@ public:
 	// Inherited via AIsometricObject
 	virtual void Update(sf::Time deltaTime) override;
 
+	virtual void reset() = 0;
+
 	void changeState(STATE state);
+
+	std::vector<sf::Sound*> standbySFX;
+	std::vector<sf::Sound*> attackSFX;
+	std::vector<sf::Sound*> damageSFX;
 
 protected:
 	int health = 100;

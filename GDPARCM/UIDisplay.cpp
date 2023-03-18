@@ -24,11 +24,10 @@ void UIDisplay::initialize()
 
 }
 
-void UIDisplay::Update(sf::Time deltaTime)
+void UIDisplay::processInput(sf::Event event)
 {
 }
 
-sf::Sprite* UIDisplay::getSprite()
+void UIDisplay::Update(sf::Time deltaTime)
 {
-	return this->sprite;
 }

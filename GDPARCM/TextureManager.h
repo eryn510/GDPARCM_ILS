@@ -20,7 +20,9 @@ public:
 	int getNumFrames(const String assetName);
 
 	sf::Texture* getStreamTextureFromList(const int index);
+	std::vector<sf::Texture*> getStreamingTextures();
 	int getNumLoadedStreamTextures() const;
+	int getStreamingCount();
 
 private:
 	TextureManager();

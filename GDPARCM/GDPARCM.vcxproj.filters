@@ -132,6 +132,21 @@
     <ClCompile Include="CombatLoop.cpp">
       <Filter>InteractiveLoadingScreen\CombatLoop</Filter>
     </ClCompile>
+    <ClCompile Include="SelectorOption.cpp">
+      <Filter>InteractiveLoadingScreen\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UIBox.cpp">
+      <Filter>InteractiveLoadingScreen\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectPlayer.cpp">
+      <Filter>Engine\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Transition.cpp">
+      <Filter>InteractiveLoadingScreen\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Box.cpp">
+      <Filter>InteractiveLoadingScreen\UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MainLoop.h">
@@ -223,6 +238,21 @@
     </ClInclude>
     <ClInclude Include="CombatLoop.h">
       <Filter>InteractiveLoadingScreen\CombatLoop</Filter>
+    </ClInclude>
+    <ClInclude Include="SelectorOption.h">
+      <Filter>InteractiveLoadingScreen\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UIBox.h">
+      <Filter>InteractiveLoadingScreen\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectPlayer.h">
+      <Filter>Engine\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Transition.h">
+      <Filter>InteractiveLoadingScreen\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Box.h">
+      <Filter>InteractiveLoadingScreen\UI</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

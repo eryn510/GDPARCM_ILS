@@ -16,6 +16,12 @@ void Tile::initialize()
 {
 }
 
+void Tile::processInput(sf::Event event)
+{
+	
+}
+
+
 void Tile::Update(sf::Time deltaTime)
 {
 }

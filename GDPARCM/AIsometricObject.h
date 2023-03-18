@@ -11,6 +11,7 @@ public:
 	virtual ~AIsometricObject();
 
 	virtual void Update(sf::Time deltaTime) = 0;
+	virtual void processInput(sf::Event event) = 0;
 	virtual void Draw(sf::RenderWindow* targetWindow, sf::RenderStates renderStates);
 
 	std::string getName();

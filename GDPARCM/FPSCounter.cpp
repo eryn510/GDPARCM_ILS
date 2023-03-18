@@ -26,6 +26,10 @@ void FPSCounter::initialize()
 {
 }
 
+void FPSCounter::processInput(sf::Event event)
+{
+}
+
 void FPSCounter::Update(sf::Time deltaTime)
 {
 	this->updateFPS(deltaTime);
@@ -48,4 +52,16 @@ void FPSCounter::updateFPS(sf::Time elapsedTime)
 	sprintf(str, "%.1f", fps);
 	std::string strFPS = str;
 	this->statsText->setString("FPS: " + strFPS);
+
+	updateTime += elapsedTime;
+	this->counter += 1;
+
+	// Displays frames counted based on specified fps display delay
+	if (updateTime.asSeconds() >= displayDelay) {
+		// Gets FPS by dividing 1 by the average elapsed time based on function execution count
+		int fps = 1 / (this->updateTime.asSeconds() / this->counter);
+		this->statsText->setString("FPS: " + std::to_string(fps));
+		this->updateTime = sf::Time(sf::seconds(0));
+		this->counter = 0;
+	}
 }

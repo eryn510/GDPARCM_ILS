@@ -23,7 +23,7 @@ TextureManager* TextureManager::getInstance() {
 TextureManager::TextureManager()
 {
 	this->countStreamingAssets();
-	this->threadPool = new ThreadPool("TextureManagerPool", 6);
+	this->threadPool = new ThreadPool("TextureManagerPool", 32);
 	this->threadPool->startScheduler();
 }
 
@@ -48,7 +48,7 @@ void TextureManager::loadStreamingAssets()
 
 	for (const auto& entry : std::filesystem::directory_iterator(FRAMES_PATH)) {
 		//simulate loading of very large file
-		IETThread::sleep(1);
+		IETThread::sleep(500);
 
 		String path = entry.path().generic_string();
 		std::vector<String> tokens = StringUtils::split(path, '/');
@@ -106,9 +106,19 @@ sf::Texture* TextureManager::getStreamTextureFromList(const int index)
 	return this->streamTextureList[index];
 }
 
+std::vector<sf::Texture*> TextureManager::getStreamingTextures()
+{
+	return this->streamTextureList;
+}
+
 int TextureManager::getNumLoadedStreamTextures() const
 {
 	return this->streamTextureList.size();
+}
+
+int TextureManager::getStreamingCount()
+{
+	return this->streamingAssetCount;
 }
 
 void TextureManager::countStreamingAssets()

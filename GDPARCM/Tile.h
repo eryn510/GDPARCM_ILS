@@ -7,6 +7,7 @@ public:
 
 	// Inherited via AIsometricObject
 	virtual void initialize() override;
+	virtual void processInput(sf::Event event) override;
 	virtual void Update(sf::Time deltaTime) override;
 };
 

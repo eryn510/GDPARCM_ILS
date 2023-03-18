@@ -1,3 +1,9 @@
-﻿  Joshua.cpp
-D:\PROJECT FILES\CODES\GDPARCM_ILS\GDPARCM\Joshua.h(1,9): warning C4068: unknown pragma 'oncepragma'
-  GDPARCM.vcxproj -> D:\PROJECT FILES\CODES\GDPARCM_ILS\x64\Debug\GDPARCM.exe
+﻿  MainLoop.cpp
+C:\FILES\CODING\PROJECTS\REPOSITORY\GDPARCM_ILS\GDPARCM\Joshua.h(1,9): warning C4068: unknown pragma 'oncepragma'
+C:\FILES\CODING\PROJECTS\REPOSITORY\GDPARCM_ILS\GDPARCM\MainLoop.cpp(51,65): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\FILES\CODING\PROJECTS\REPOSITORY\GDPARCM_ILS\GDPARCM\MainLoop.cpp(56,69): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+  TextureDisplay.cpp
+C:\FILES\CODING\PROJECTS\REPOSITORY\GDPARCM_ILS\GDPARCM\ObjectPlayer.h(21,25): warning C4305: 'initializing': truncation from 'double' to 'const float'
+  Generating Code...
+  LINK : program database C:\FILES\CODING\PROJECTS\REPOSITORY\GDPARCM_ILS\x64\Debug\GDPARCM.pdb missing; performing full link
+  GDPARCM.vcxproj -> C:\FILES\CODING\PROJECTS\REPOSITORY\GDPARCM_ILS\x64\Debug\GDPARCM.exe

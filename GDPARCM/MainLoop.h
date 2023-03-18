@@ -1,5 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include "ACharacter.h"
+#include "Box.h"
+#include "Transition.h"
 
 class MainLoop {
 public:
@@ -36,6 +38,12 @@ private:
 
     float elapsedTime = 0;
     float maxTime = 0.25;
+
+    float transitionDelta = 0.0f;
+    bool start = false;
+
+    Transition* transitionBox = nullptr;
+    Box* backBox = nullptr;
 
     int total = 1;
     int i = 0;
